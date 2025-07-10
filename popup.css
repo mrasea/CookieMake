@@ -1,0 +1,315 @@
+/* 全局样式 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 500px;
+  width: 400px;
+}
+
+.container {
+  background: white;
+  border-radius: 12px;
+  margin: 8px;
+  padding: 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  min-height: 480px;
+}
+
+/* 头部样式 */
+header {
+  text-align: center;
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 2px solid #f0f0f0;
+}
+
+header h1 {
+  color: #333;
+  font-size: 24px;
+  margin-bottom: 8px;
+}
+
+.domain-info {
+  background: #e8f4fd;
+  color: #1976d2;
+  padding: 8px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  display: inline-block;
+  max-width: 100%;
+  word-break: break-all;
+}
+
+/* 输入区域样式 */
+.input-section {
+  margin-bottom: 20px;
+  background: #f8f9fa;
+  padding: 15px;
+  border-radius: 8px;
+}
+
+.input-section h3 {
+  color: #495057;
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+#cookieInput {
+  width: 100%;
+  height: 80px;
+  padding: 10px;
+  border: 2px solid #e9ecef;
+  border-radius: 6px;
+  font-size: 12px;
+  resize: vertical;
+  margin-bottom: 10px;
+  font-family: 'Courier New', monospace;
+}
+
+#cookieInput:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+/* 按钮样式 */
+.btn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-width: 70px;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.btn-primary {
+  background: #667eea;
+  color: white;
+}
+
+.btn-secondary {
+  background: #6c757d;
+  color: white;
+}
+
+.btn-success {
+  background: #28a745;
+  color: white;
+}
+
+.btn-danger {
+  background: #dc3545;
+  color: white;
+}
+
+.btn-info {
+  background: #17a2b8;
+  color: white;
+}
+
+/* Cookie区域样式 */
+.cookie-section {
+  margin-bottom: 20px;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.section-header h3 {
+  color: #495057;
+  font-size: 16px;
+}
+
+.cookie-list {
+  max-height: 200px;
+  overflow-y: auto;
+  border: 1px solid #e9ecef;
+  border-radius: 6px;
+  background: white;
+}
+
+.cookie-item {
+  padding: 12px;
+  border-bottom: 1px solid #f8f9fa;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background-color 0.2s ease;
+}
+
+.cookie-item:hover {
+  background-color: #f8f9fa;
+}
+
+.cookie-item:last-child {
+  border-bottom: none;
+}
+
+.cookie-info {
+  flex: 1;
+  margin-right: 10px;
+}
+
+.cookie-name {
+  font-weight: 600;
+  color: #495057;
+  font-size: 13px;
+  margin-bottom: 4px;
+  word-break: break-all;
+}
+
+.cookie-value {
+  color: #6c757d;
+  font-size: 11px;
+  font-family: 'Courier New', monospace;
+  word-break: break-all;
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.cookie-actions {
+  display: flex;
+  gap: 5px;
+}
+
+.btn-small {
+  padding: 4px 8px;
+  font-size: 10px;
+  min-width: 40px;
+}
+
+/* 添加Cookie区域 */
+.add-cookie {
+  margin-top: 15px;
+  background: #f8f9fa;
+  padding: 15px;
+  border-radius: 8px;
+}
+
+.add-cookie h4 {
+  color: #495057;
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+
+.input-group {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.input-group input {
+  flex: 1;
+  padding: 8px;
+  border: 2px solid #e9ecef;
+  border-radius: 4px;
+  font-size: 12px;
+}
+
+.input-group input:focus {
+  outline: none;
+  border-color: #667eea;
+}
+
+/* 操作区域 */
+.actions {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  padding-top: 15px;
+  border-top: 2px solid #f0f0f0;
+}
+
+/* 加载状态 */
+.loading {
+  text-align: center;
+  color: #6c757d;
+  padding: 20px;
+  font-style: italic;
+}
+
+/* 空状态 */
+.empty-state {
+  text-align: center;
+  color: #6c757d;
+  padding: 20px;
+  font-style: italic;
+}
+
+/* 滚动条样式 */
+.cookie-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.cookie-list::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 3px;
+}
+
+.cookie-list::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 3px;
+}
+
+.cookie-list::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
+
+/* 编辑状态样式 */
+.cookie-item.editing .cookie-info {
+  display: none;
+}
+
+.cookie-item .edit-form {
+  display: none;
+  flex: 1;
+  margin-right: 10px;
+}
+
+.cookie-item.editing .edit-form {
+  display: flex;
+  gap: 5px;
+}
+
+.edit-form input {
+  flex: 1;
+  padding: 4px 6px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 11px;
+}
+
+/* 响应式调整 */
+@media (max-width: 420px) {
+  .container {
+    margin: 4px;
+    padding: 15px;
+  }
+  
+  .input-group {
+    flex-direction: column;
+  }
+  
+  .actions {
+    flex-direction: column;
+  }
+}

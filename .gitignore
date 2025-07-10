@@ -1,0 +1,38 @@
+# 忽略 issue 文件夹
+issue/
+
+# 忽略临时文件和工具生成的文件
+create_icons.py
+*.tmp
+*.temp
+.DS_Store
+Thumbs.db
+
+# 忽略编辑器和IDE文件
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# 忽略日志文件
+*.log
+logs/
+
+# 忽略Node.js相关文件（如果将来使用）
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# 忽略打包文件
+*.zip
+*.crx
+*.pem
+
+# 忽略系统文件
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local

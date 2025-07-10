@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cookie管理器</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>🍪 Cookie管理器</h1>
+      <div class="domain-info" id="domainInfo">正在加载...</div>
+    </header>
+
+    <div class="input-section">
+      <h3>批量导入Cookie</h3>
+      <textarea 
+        id="cookieInput" 
+        placeholder="请输入Cookie字符串或JSON格式&#10;例如: name1=value1; name2=value2&#10;或: {'name1': 'value1', 'name2': 'value2'}"
+      ></textarea>
+      <button id="importBtn" class="btn btn-primary">导入Cookie</button>
+    </div>
+
+    <div class="cookie-section">
+      <div class="section-header">
+        <h3>当前页面Cookie</h3>
+        <button id="refreshBtn" class="btn btn-secondary">刷新</button>
+      </div>
+      
+      <div class="cookie-list" id="cookieList">
+        <div class="loading">正在加载Cookie...</div>
+      </div>
+
+      <div class="add-cookie">
+        <h4>添加新Cookie</h4>
+        <div class="input-group">
+          <input type="text" id="newCookieName" placeholder="Cookie名称">
+          <input type="text" id="newCookieValue" placeholder="Cookie值">
+          <button id="addBtn" class="btn btn-success">添加</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="actions">
+      <button id="clearAllBtn" class="btn btn-danger">清除所有Cookie</button>
+      <button id="exportBtn" class="btn btn-info">导出Cookie</button>
+    </div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
