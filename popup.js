@@ -152,7 +152,7 @@ class CookieManager {
     }
 
     cookieList.innerHTML = this.cookies.map(cookie => `
-      <div class="cookie-item" data-name="${this.escapeHtml(cookie.name)}" data-domain="${this.escapeHtml(cookie.domain)}" data-path="${this.escapeHtml(cookie.path)}">
+      <div class="cookie-item" data-name="${this.escapeHtml(cookie.name)}" data-domain="${this.escapeHtml(cookie.domain)}" data-path="${this.escapeHtml(cookie.path)}" data-value="${this.escapeHtml(cookie.value)}">
         <div class="cookie-info">
           <div class="cookie-name">${this.escapeHtml(cookie.name)}</div>
           <div class="cookie-value" title="${this.escapeHtml(cookie.value)}">${this.escapeHtml(this.truncateValue(cookie.value))}</div>
@@ -165,6 +165,9 @@ class CookieManager {
           <button class="btn btn-info btn-small edit-btn">编辑</button>
           <button class="btn btn-success btn-small save-btn" style="display:none">保存</button>
           <button class="btn btn-secondary btn-small cancel-btn" style="display:none">取消</button>
+          <button class="btn btn-info btn-small edit-copy-key">键</button>
+          <button class="btn btn-info btn-small edit-copy-value">值</button>
+          <button class="btn btn-success btn-small export-btn">导出</button>
           <button class="btn btn-danger btn-small delete-btn">删除</button>
         </div>
       </div>
@@ -181,10 +184,21 @@ class CookieManager {
     const cookieItems = document.querySelectorAll('.cookie-item');
     
     cookieItems.forEach(item => {
+      const copyKeyBtn = item.querySelector('.edit-copy-key');
+      const copyValueBtn = item.querySelector('.edit-copy-value');
       const editBtn = item.querySelector('.edit-btn');
       const saveBtn = item.querySelector('.save-btn');
+      const exportBtn = item.querySelector('.export-btn');
       const cancelBtn = item.querySelector('.cancel-btn');
       const deleteBtn = item.querySelector('.delete-btn');
+
+      copyKeyBtn.addEventListener('click', () => {
+        this.copyCookie(item, true);
+      });
+
+      copyValueBtn.addEventListener('click', () => {
+        this.copyCookie(item, false);
+      });
 
       // 编辑按钮
       editBtn.addEventListener('click', () => {
@@ -196,6 +210,10 @@ class CookieManager {
         this.saveCookieEdit(item);
       });
 
+      // 导出按钮
+      exportBtn.addEventListener('click', () => {
+        this.exportSelecttCookie(item);
+      });
       // 取消按钮
       cancelBtn.addEventListener('click', () => {
         this.cancelEdit(item);
@@ -207,18 +225,76 @@ class CookieManager {
       });
     });
   }
+  /**
+   * 导出选择Cookie
+   */
+  async copyCookie(item, isKey) {
+    try {
+      // 导出为JSON格式
+      const cookieData = {};
+      cookieData[item.dataset.name] = item.dataset.value;
+      if (isKey) {
+        await navigator.clipboard.writeText(item.dataset.name);
+      } else {
+        await navigator.clipboard.writeText(item.dataset.value);
+      }
+      this.showSuccess('已复制到剪贴板');
 
+    } catch (error) {
+      console.error('导出Cookie失败:', error);
+      
+      // fallback: 显示在输入框中
+      const cookieData = {};
+      this.cookies.forEach(cookie => {
+        cookieData[cookie.name] = cookie.value;
+      });
+      
+      document.getElementById('cookieInput').value = JSON.stringify(cookieData, null, 2);
+      this.showSuccess('Cookie已显示在输入框中');
+    }
+  }
   /**
    * 进入编辑模式
    */
   enterEditMode(item) {
     item.classList.add('editing');
     item.querySelector('.edit-btn').style.display = 'none';
+    item.querySelector('.edit-copy-key').style.display = 'none';
+    item.querySelector('.edit-copy-value').style.display = 'none';
+    item.querySelector('.export-btn').style.display = 'none';
+    item.querySelector('.delete-btn').style.display = 'none';
+
     item.querySelector('.save-btn').style.display = 'inline-block';
     item.querySelector('.cancel-btn').style.display = 'inline-block';
     item.querySelector('.edit-name').focus();
   }
+  /**
+   * 导出选择Cookie
+   */
+  async exportSelecttCookie(item) {
+    try {
+      // 导出为JSON格式
+      const cookieData = {};
+      cookieData[item.dataset.name] = item.dataset.value;
+      const jsonString = JSON.stringify(cookieData, null, 2);
+      
+      // 复制到剪贴板
+      await navigator.clipboard.writeText(jsonString);
+      this.showSuccess('Cookie已复制到剪贴板');
 
+    } catch (error) {
+      console.error('导出Cookie失败:', error);
+      
+      // fallback: 显示在输入框中
+      const cookieData = {};
+      this.cookies.forEach(cookie => {
+        cookieData[cookie.name] = cookie.value;
+      });
+      
+      document.getElementById('cookieInput').value = JSON.stringify(cookieData, null, 2);
+      this.showSuccess('Cookie已显示在输入框中');
+    }
+  }
   /**
    * 保存Cookie编辑
    */
@@ -268,6 +344,10 @@ class CookieManager {
   cancelEdit(item) {
     item.classList.remove('editing');
     item.querySelector('.edit-btn').style.display = 'inline-block';
+    item.querySelector('.edit-copy-key').style.display = 'inline-block';
+    item.querySelector('.edit-copy-value').style.display = 'inline-block';
+    item.querySelector('.export-btn').style.display = 'inline-block';
+    item.querySelector('.delete-btn').style.display = 'inline-block';
     item.querySelector('.save-btn').style.display = 'none';
     item.querySelector('.cancel-btn').style.display = 'none';
     
